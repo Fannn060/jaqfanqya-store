@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontak - JakFanQya STORE</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+  <header>
+    <h1>Kontak Kami</h1>
+  </header>
+<body class="kntk" >
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="produk.html">Produk</a>
+    <a href="tentang.html">Tentang Kami</a>
+    <a href="kontak.html">Kontak</a>
+    <a href="bantuan.html">Bantuan</a>
+  </nav>
+
+  <div class="contact-container">
+    <div class="contact-info">
+      <h2>Hubungi Kami</h2>
+      <p><i class="fas fa-envelope"></i> <a href="mailto:jakfanqya@store.com">jakfanqya@store.com</a></p>
+      <p><i class="fab fa-instagram"></i> <a href="https://instagram.com/jakfanqya.store" target="_blank">@jakfanqya.store</a></p>
+      <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/62895620350550" target="_blank">0895-6203-50550</a></p>
+    </div>
+  
+    <div class="contact-map">
+      <h3>Lokasi Kami</h3>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3984.594241443855!2d104.73958329999999!3d-2.9323333000000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMsKwNTUnNTYuNCJTIDEwNMKwNDQnMjIuNSJF!5e0!3m2!1sid!2sid!4v1746502038498!5m2!1sid!2sid" 
+        width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+  
+  <div class="wrapper">
+  <footer>
+    <p>&copy; 2025 JakFanQya STORE. All rights reserved.</p>
+  </footer>
+  </div>
+  <div class="komentar-box">
+    <div class="judul-komentar">
+      <h3>Komentar Pengunjung</h3>
+    </div>
+    <div class="komentar-tampilan" id="komentarTampilan">
+      <div class="komentar-list" id="komentarList"></div>
+    </div>
+    <form id="formKomentar">
+      <input type="text" id="inputKomentar" placeholder="Tulis komentar..." required>
+      <button type="submit">Kirim</button>
+    </form>
+  </div>
+  <script>
+    const formKomentar = document.getElementById("formKomentar");
+    const inputKomentar = document.getElementById("inputKomentar");
+    const komentarList = document.getElementById("komentarList");
+    const komentarData = [];
+  
+    formKomentar.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const teks = inputKomentar.value.trim();
+      if (teks !== "") {
+        komentarData.unshift(teks);
+        tampilkanKomentar();
+        inputKomentar.value = "";
+      }
+    });
+  
+    function tampilkanKomentar() {
+      komentarList.innerHTML = komentarData.map(k => `<p>${k}</p>`).join("");
+    }
+  </script>
+  
+</body>
+</html>
+
+<div class="chatbox">
+  <div class="chatbox-header">Chat dengan Kami</div>
+  <div class="chatbox-body">
+    <p>Klik tombol di bawah untuk menghubungi kami via WhatsApp.</p>
+    <a href="https://wa.me/6283830520925" target="_blank" class="chat-button">Chat Sekarang</a>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  </div>
+</div>
+

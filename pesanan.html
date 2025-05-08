@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Form Pemesanan</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    const hargaProduk = {
+      "Hoodie Distro": 229000,
+      "Kemeja Distro": 149000,
+      "Topi Distro": 90000,
+      "Celana Distro": 49000,
+      "Sepatu": 449000,
+      "Jam Tangan": 249000,
+      "Backpack Distro": 299000,
+      "Kaos Distro": 119000,
+      "Topi Nike" : 90000,
+      "Topi MT" : 90000,
+      "Topi LE" : 90000,
+      "Kaos Hawai": 129000,
+      "Kaos Petrol": 129000,
+      "Backpack Men's": 279000,
+      "Jam Tangan Justin": 999999,
+      "Hoodie NoDaysOff": 349000,
+  "Hoodie Zipper": 549000,
+  "Span Premium": 229000,
+  "Docmart": 179000,
+  "Kemeja Flannel": 199000,
+  "Hoodie Boxy": 499000,
+  "Kaos Skena": 109000,
+  "Levis Slimfit": 149000,
+  "SmartWatch": 599000,
+  "Adidas Limited": 799000,
+  "Kemeja YungKai": 699000,
+  "Kemeja Vintage": 399000,
+  "Bag Shoulder Military": 543000,
+  "Baggy Pants": 193000,
+  "Nike Air": 599000,
+  "America Backpack": 399000
+};
+
+
+    function cekProduk() {
+      const produk = document.getElementById("produk").value;
+      const ukuranDiv = document.getElementById("ukuran-group");
+      const tanpaUkuran = ["Jam Tangan", "Topi Distro", "Backpack Distro","Topi Nike","Topi MT","Topi LE", "Jam Tangan Justin","SmartWatch", "Topi MT", "Backpack Men's","Span Premium","Bag Shoulder Military", "America Backpack"];
+      if (tanpaUkuran.includes(produk)) {
+        ukuranDiv.style.display = "none";
+        document.getElementById("ukuran").required = false;
+      } else {
+        ukuranDiv.style.display = "block";
+        document.getElementById("ukuran").required = true;
+      }
+      hitungTotal();
+    }
+
+    function hitungTotal() {
+      const produk = document.getElementById("produk").value;
+      const jumlah = parseInt(document.getElementById("jumlah").value);
+      const totalHargaEl = document.getElementById("total-harga");
+
+      if (produk && hargaProduk[produk] && jumlah > 0) {
+        const total = hargaProduk[produk] * jumlah;
+        totalHargaEl.innerText = `Total Harga: Rp ${total.toLocaleString("id-ID")}`;
+      } else {
+        totalHargaEl.innerText = "";
+      }
+    }
+
+    window.onload = function() {
+      document.getElementById("produk").addEventListener("change", cekProduk);
+      document.getElementById("jumlah").addEventListener("input", hitungTotal);
+    }
+  </script>
+  
+</head>
+<body class="bgPesan">
+  <section class="form-pesan">
+    
+    <h2>Formulir Pemesanan</h2>
+    <form action="selesai.html" method="get">
+      
+      <label for="nama">Nama:</label>
+      <input type="text" id="nama" name="nama" required />
+
+      <label for="nohp">Nomor HP:</label>
+      <input type="tel" id="nohp" name="nohp" pattern="[0-9]{10,13}" placeholder="08xxxxxxxxxx" required />
+
+      <label for="produk">Produk yang dipesan:</label>
+      <select id="produk" name="produk" required>
+        <option value="">-- Pilih Produk --</option>
+        <option value="Hoodie Distro">Hoodie Distro</option>
+        <option value="Kemeja Distro">Kemeja Distro</option>
+        <option value="Topi Distro">Topi Distro</option>
+        <option value="Celana Distro">Celana Distro</option>
+        <option value="Sepatu">Sepatu</option>
+        <option value="Jam Tangan">Jam Tangan</option>
+        <option value="Backpack Distro">Backpack Distro</option>
+        <option value="Kaos Distro">Kaos Distro</option>
+        <option value="Topi Nike">Topi Nike</option>
+        <option value="Topi LE">Topi LE</option>
+        <option value="Topi MT">Topi MT</option>
+        <option value="Kaos Hawai">Kaos Hawai</option>
+        <option value="Kaos Petrol">Kaos Petrol</option>
+        <option value="Backpack Men's">Backpack Men's</option>
+        <option value="Jam Tangan Justin">Jam Tangan Justin</option>
+        <option value="Hoodie NoDaysOff">Hoodie NoDaysOff</option>
+        <option value="Hoodie Zipper">Hoodie Zipper</option>
+        <option value="Span Premium">Span Premium</option>
+        <option value="Docmart">Docmart</option>
+        <option value="Kemeja Flannel">Kemeja Flannel</option>
+        <option value="Hoodie Boxy">Hoodie Boxy</option>
+        <option value="Kaos Skena">Kaos Skena</option>
+        <option value="Levis Slimfit">Levis Slimfit</option>
+        <option value="SmartWatch">SmartWatch</option>
+        <option value="Adidas Limited">Adidas Limited</option>
+        <option value="Kemeja YungKai">Kemeja YungKai</option>
+        <option value="Kemeja Vintage">Kemeja Vintage</option>
+        <option value="Bag Shoulder Military">Bag Shoulder Military</option>
+        <option value="Baggy Pants">Baggy Pants</option>
+        <option value="Nike Air">Nike Air</option>
+        <option value="America Backpack">America Backpack</option>
+      </select>
+
+
+      <div id="ukuran-group">
+        <label for="ukuran">Ukuran:</label>
+        <select id="ukuran" name="ukuran">
+          <option value="">-- Pilih Ukuran --</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+        </select>
+      </div>
+
+      <label for="jumlah">Jumlah:</label>
+      <input type="number" id="jumlah" name="jumlah" min="1" required />
+
+      <p id="total-harga" style="font-weight: bold; color: green;"></p>
+
+      <label for="alamat">Alamat Pengiriman:</label>
+      <textarea id="alamat" name="alamat" required></textarea>
+
+      <label for="pembayaran">Metode Pembayaran:</label>
+      <select id="pembayaran" name="pembayaran" required>
+        <option value="">-- Pilih Metode Pembayaran --</option>
+        <option value="Transfer Bank">Transfer Bank</option>
+        <option value="COD (Bayar di Tempat)">COD (Bayar di Tempat)</option>
+        <option value="E-Wallet">E-Wallet (Dana, OVO, Gopay)</option>
+      </select>
+
+      <button type="submit">Kirim Pesanan</button>
+    </form>
+  </section>
+  <script>
+    window.onload = function () {
+      // Baca parameter dari URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const produkDariURL = urlParams.get("produk");
+  
+      // Jika produk ada di URL, isi otomatis select-nya
+      if (produkDariURL) {
+        const selectProduk = document.getElementById("produk");
+        selectProduk.value = produkDariURL;
+        cekProduk(); // Jalankan fungsi untuk tampilkan ukuran/total harga
+      }
+  
+      document.getElementById("produk").addEventListener("change", cekProduk);
+      document.getElementById("jumlah").addEventListener("input", hitungTotal);
+    };
+  </script>
+</body>
+</html>

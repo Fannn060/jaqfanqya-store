@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Struk Pesanan</title>
+  <style>
+    body {
+      background-color: #eee;
+      font-family: 'Courier New', Courier, monospace;
+      color: #000;
+    }
+    .struk {
+      background-color: #fff;
+      width: 320px;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px dashed #000;
+    }
+    .struk h2 {
+      text-align: center;
+      margin: 0 0 10px 0;
+    }
+    .line {
+      border-top: 1px dashed #000;
+      margin: 10px 0;
+    }
+    .item {
+      display: flex;
+      justify-content: space-between;
+    }
+    .btn {
+      display: block;
+      margin: 20px auto 10px;
+      background-color: #111;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .center {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="struk" id="struk">
+    <h2>JakFanQya Store</h2>
+    <div class="center">Jl. Sukabangun 2 30151</div>
+    <div class="center">Telp: 0895-6203-50550</div>
+    <div class="line"></div>
+
+    <div class="item"><span>Nama</span><span id="nama"></span></div>
+    <div class="item"><span>No. HP</span><span id="nohp"></span></div>
+    <div class="item"><span>Produk</span><span id="produk"></span></div>
+    <div class="item"><span>Ukuran</span><span id="ukuran"></span></div>
+    <div class="item"><span>Jumlah</span><span id="jumlah"></span></div>
+    <div class="item"><span>Harga</span><span id="harga-satuan"></span></div>
+    <div class="item"><span>Total</span><span id="total-harga"></span></div>
+    <div class="item"><span>Alamat</span><span id="alamat"></span></div>
+    <div class="item"><span>Pembayaran</span><span id="pembayaran"></span></div>
+    <div class="line"></div>
+    <div class="center" id="waktu"></div>
+    <div class="center">-- Terima Kasih --</div>
+  </div>
+
+  <button class="btn" onclick="window.location.href='index.html'">Beranda</button>
+  <button class="btn" onclick="downloadStruk()">Download Struk</button>
+
+  <!-- Library html2pdf -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <script>
+    const query = new URLSearchParams(window.location.search);
+
+    const hargaProduk = {
+      "Hoodie Distro": 229000,
+      "Kemeja Distro": 149000,
+      "Topi Distro": 99000,
+      "Celana Distro": 49999,
+      "Sepatu Distro": 449000,
+      "Jam Tangan": 249000,
+      "Backpack Distro": 299000,
+      "Kaos Distro": 119000,
+      "Topi Nike": 90000,
+      "Topi MT": 90000,
+      "Topi LE": 90000,
+      "Kaos Hawai": 129000,
+      "Kaos Petrol": 129000,
+      "Backpack Men's": 279000,
+      "Jam Tangan Justin": 999999,
+      "Hoodie NoDaysOff": 349000,
+      "Hoodie Zipper": 549000,
+      "Span Premium": 229000,
+      "Docmart": 179000,
+      "Kemeja Flannel": 199000,
+      "Hoodie Boxy": 499000,
+      "Kaos Skena": 109000,
+      "Levis Slimfit": 149000,
+      "SmartWatch": 599000,
+      "Adidas Limited": 799000,
+      "Kemeja YungKai": 699000,
+      "Kemeja Vintage": 399000,
+      "Bag Shoulder Military": 543000,
+      "Baggy Pants": 193000,
+      "Nike Air": 599000,
+      "America Backpack": 399000
+    };
+
+    const produk = query.get("produk");
+    const jumlah = parseInt(query.get("jumlah")) || 0;
+    const hargaSatuan = hargaProduk[produk] || 0;
+    const totalHarga = hargaSatuan * jumlah;
+
+    document.getElementById("nama").textContent = query.get("nama");
+    document.getElementById("nohp").textContent = query.get("nohp");
+    document.getElementById("produk").textContent = produk;
+    document.getElementById("ukuran").textContent = query.get("ukuran") || "-";
+    document.getElementById("jumlah").textContent = jumlah;
+    document.getElementById("harga-satuan").textContent = "Rp" + hargaSatuan.toLocaleString();
+    document.getElementById("total-harga").textContent = "Rp" + totalHarga.toLocaleString();
+    document.getElementById("alamat").textContent = query.get("alamat");
+    document.getElementById("pembayaran").textContent = query.get("pembayaran");
+
+    const now = new Date();
+    const tanggal = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
+    const waktu = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+    document.getElementById("waktu").textContent = `Tanggal: ${tanggal} ${waktu}`;
+
+    function downloadStruk() {
+      const element = document.getElementById('struk');
+      const opt = {
+        margin:       0.3,
+        filename:     'struk_pesanan.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
+  </script>
+</body>
+</html>
